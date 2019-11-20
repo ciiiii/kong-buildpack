@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Kong"
+exit 0
