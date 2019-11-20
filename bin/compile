@@ -55,6 +55,9 @@ apt-get $APT_OPTIONS update | indent
 
 cat "$BP_DIR/Aptfile"
 
+echo "$BP_DIR"
+echo "$BUILD_DIR"
+
 for PACKAGE in $(cat $BP_DIR/Aptfile); do
     topic "Fetching .debs for $PACKAGE"
     echo "$PACKAGE"
