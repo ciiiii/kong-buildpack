@@ -54,9 +54,8 @@ topic "Updating apt caches"
 apt-get $APT_OPTIONS update | indent
 
 cat "$BP_DIR/Aptfile"
-cat "$BUILD_DIR/Aptfile"
 
-for PACKAGE in $(cat $BP_DIR/Aptfile $BUILD_DIR/Aptfile); do
+for PACKAGE in $(cat $BP_DIR/Aptfile); do
     topic "Fetching .debs for $PACKAGE"
     echo "$PACKAGE"
     apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall $PACKAGE | indent
