@@ -32,6 +32,7 @@ OPENRESTY_VERSION=1.15.8.1
 KONG_RUNTIME=kong-runtime
 APP_PREFIX=/app/$KONG_RUNTIME
 mkdir -p $APP_PREFIX
+export PATH=$PATH:/sbin
 
 function error() {
     echo " !     $*" >&2
@@ -59,6 +60,7 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state=$APT_STATE_DIR"
 
 topic "Updating apt caches"
+
 apt-get $APT_OPTIONS update | indent
 
 for PACKAGE in $(cat $BP_DIR/Aptfile cat $BUILD_DIR/Aptfile); do
