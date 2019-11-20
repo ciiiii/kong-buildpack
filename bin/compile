@@ -53,6 +53,9 @@ APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state
 topic "Updating apt caches"
 apt-get $APT_OPTIONS update | indent
 
+cat "$BP_DIR/Aptfile"
+cat "$BUILD_DIR/Aptfile"
+
 for PACKAGE in $(cat $BP_DIR/Aptfile $BUILD_DIR/Aptfile); do
     topic "Fetching .debs for $PACKAGE"
     echo "$PACKAGE"
