@@ -25,6 +25,10 @@ LUAROCKS_VERSION=3.1.3
 OPENSSL_VERSION=1.1.1b
 OPENRESTY_VERSION=1.15.8.1
 
+KONG_RUNTIME=kong-runtime
+APP_PREFIX=/app/$KONG_RUNTIME
+mkdir -p $APP_PREFIX
+
 function error() {
     echo " !     $*" >&2
     exit 1
@@ -54,7 +58,7 @@ topic "Updating apt caches"
 apt-get $APT_OPTIONS update | indent
 
 for PACKAGE in $(cat $BP_DIR/Aptfile cat $BUILD_DIR/Aptfile); do
-    topic "Install Apt $PACKAGE"
+    topic "Install $PACKAGE"
     apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall $PACKAGE | indent
 done
 
