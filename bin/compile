@@ -63,7 +63,7 @@ topic "Updating apt caches"
 
 apt-get $APT_OPTIONS update | indent
 
-for PACKAGE in $(cat $BP_DIR/Aptfile cat $BUILD_DIR/Aptfile); do
+for PACKAGE in $(cat $BP_DIR/Aptfile $BUILD_DIR/Aptfile); do
     topic "Install $PACKAGE"
     apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall $PACKAGE | indent
 done
@@ -100,11 +100,10 @@ cd openresty-build-tools
     --openresty $OPENRESTY_VERSION \
     --openssl $OPENSSL_VERSION \
     --luarocks $LUAROCKS_VERSION
-ln -s "$(pwd)/buildroot/luarocks/bin/luarocks" /usr/bin/luarocks
-ln -s "$(pwd)/buildroot/openresty/nginx/sbin/nginx" /usr/bin/nginx
-ln -s "$(pwd)/buildroot/openresty/bin/resty" /usr/bin/resty
-ln -s "$(pwd)/buildroot/openresty/bin/openresty" /usr/bin/openresty
-mv "$(pwd)/buildroot/openresty/bin/resty" /usr/bin
+sudo ln -s "$(pwd)/buildroot/luarocks/bin/luarocks" /usr/bin/luarocks
+sudo ln -s "$(pwd)/buildroot/openresty/nginx/sbin/nginx" /usr/bin/nginx
+sudo ln -s "$(pwd)/buildroot/openresty/bin/resty" /usr/bin/resty
+sudo ln -s "$(pwd)/buildroot/openresty/bin/openresty" /usr/bin/openresty
 luarocks --version
 openresty -v
 nginx -v
