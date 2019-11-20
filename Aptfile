@@ -1,0 +1,14 @@
+make
+gcc
+git
+libpcre3-dev
+libssl-dev
+perl
+build-essential
+curl
+zlib1g-dev
+unzip
+m4
+libyaml-dev
+valgrind
+jq
