@@ -96,14 +96,15 @@ topic "Build Kong Dependencies"
 git clone https://github.com/Kong/openresty-build-tools.git
 cd openresty-build-tools
 ./kong-ngx-build \
-    -p "/${APP_PREFIX}" \
+    -p buildroot \
     --openresty $OPENRESTY_VERSION \
     --openssl $OPENSSL_VERSION \
     --luarocks $LUAROCKS_VERSION
-sudo ln -s "$(pwd)/buildroot/luarocks/bin/luarocks" /usr/bin/luarocks
-sudo ln -s "$(pwd)/buildroot/openresty/nginx/sbin/nginx" /usr/bin/nginx
-sudo ln -s "$(pwd)/buildroot/openresty/bin/resty" /usr/bin/resty
-sudo ln -s "$(pwd)/buildroot/openresty/bin/openresty" /usr/bin/openresty
+ln -s "$(pwd)/buildroot/luarocks/bin/luarocks" /usr/bin/luarocks
+ln -s "$(pwd)/buildroot/openresty/nginx/sbin/nginx" /usr/bin/nginx
+ln -s "$(pwd)/buildroot/openresty/bin/resty" /usr/bin/resty
+ln -s "$(pwd)/buildroot/openresty/bin/openresty" /usr/bin/openresty
+# export PATH=""
 luarocks --version
 openresty -v
 nginx -v
