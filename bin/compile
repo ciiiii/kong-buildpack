@@ -101,10 +101,6 @@ cd openresty-build-tools
     --openresty $OPENRESTY_VERSION \
     --openssl $OPENSSL_VERSION \
     --luarocks $LUAROCKS_VERSION
-ln -s "$(pwd)/buildroot/luarocks/bin/luarocks" /usr/bin/luarocks
-ln -s "$(pwd)/buildroot/openresty/nginx/sbin/nginx" /usr/bin/nginx
-ln -s "$(pwd)/buildroot/openresty/bin/resty" /usr/bin/resty
-ln -s "$(pwd)/buildroot/openresty/bin/openresty" /usr/bin/openresty
 export PATH="$APP_PREFIX/openresty-build-tools/buildroot/luarocks/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/nginx/sbin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/bin:$PATH"
 luarocks --version
 openresty -v
