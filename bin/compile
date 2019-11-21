@@ -117,4 +117,12 @@ make install
 export PATH="$APP_PREFIX/kong/bin:$PATH"
 eval "$(luarocks path)"
 kong version -vv
-cd ..
+
+cd ${BP_DIR}
+mkdir -p $BUILD_DIR/.profile.d
+mv .profile.d/* $BUILD_DIR/.profile.d
+mkdir -p $BUILD_DIR/config
+mv config/* $BUILD_DIR/config
+# Move executables for Procfile into place
+mkdir -p $BUILD_DIR/bin
+cp $BP_DIR/bin/app/heroku-* $BUILD_DIR/bin/
