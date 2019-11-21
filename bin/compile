@@ -126,3 +126,5 @@ mv config/* $BUILD_DIR/config
 # Move executables for Procfile into place
 mkdir -p $BUILD_DIR/bin
 cp $BP_DIR/bin/app/kong-* $BUILD_DIR/bin/
+
+export | grep -E -e ' (PATH)=' >"$BP_DIR/export"
