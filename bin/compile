@@ -125,4 +125,4 @@ mkdir -p $BUILD_DIR/config
 mv config/* $BUILD_DIR/config
 # Move executables for Procfile into place
 mkdir -p $BUILD_DIR/bin
-cp $BP_DIR/bin/app/heroku-* $BUILD_DIR/bin/
+cp $BP_DIR/bin/app/kong-* $BUILD_DIR/bin/

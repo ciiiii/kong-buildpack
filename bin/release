@@ -4,5 +4,6 @@ cat <<EOF
 ---
 addons:
 default_process_types:
-    release: echo "*******release*******"
+    web: bin/kong-migration
+    release: bin/kong-start
 EOF
