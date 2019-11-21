@@ -113,7 +113,8 @@ cd kong
 git checkout "$KONG_GIT_COMMIT"
 make install
 
-ln -s "$(pwd)/bin/kong" /usr/bin/kong
+# ln -s "$(pwd)/bin/kong" /usr/bin/kong
+export PATH="$APP_PREFIX/kong/bin:$PATH"
 eval "$(luarocks path)"
 kong version -vv
 cd ..
