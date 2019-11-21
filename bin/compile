@@ -92,6 +92,7 @@ mkdir -p $BUILD_DIR/.apt
 # export LUA_PATH="$BUILD_DIR/lib/?.lua;$BUILD_DIR/lib/?/init.lua;$BUILD_DIR/.luarocks/share/lua/5.1/?.lua;$BUILD_DIR/.luarocks/share/lua/5.1/?/init.lua;$APP_PREFIX/share/lua/5.1/?.lua;$APP_PREFIX/share/lua/5.1/?/init.lua;./?.lua"
 # export LUA_CPATH="$BUILD_DIR/lib/?.so;$BUILD_DIR/.luarocks/lib/lua/5.1/?.so;$APP_PREFIX/lib/lua/5.1/?.so;./?.so"
 
+cd $APP_PREFIX
 topic "Build Kong Dependencies"
 git clone https://github.com/Kong/openresty-build-tools.git
 cd openresty-build-tools
@@ -104,7 +105,7 @@ ln -s "$(pwd)/buildroot/luarocks/bin/luarocks" /usr/bin/luarocks
 ln -s "$(pwd)/buildroot/openresty/nginx/sbin/nginx" /usr/bin/nginx
 ln -s "$(pwd)/buildroot/openresty/bin/resty" /usr/bin/resty
 ln -s "$(pwd)/buildroot/openresty/bin/openresty" /usr/bin/openresty
-# export PATH=""
+export PATH="$APP_PREFIX/openresty-build-tools/buildroot/luarocks/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/nginx/sbin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/bin:$PATH"
 luarocks --version
 openresty -v
 nginx -v
