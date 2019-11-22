@@ -102,9 +102,6 @@ cd openresty-build-tools
     --openssl $OPENSSL_VERSION \
     --luarocks $LUAROCKS_VERSION
 export PATH="$APP_PREFIX/openresty-build-tools/buildroot/luarocks/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/nginx/sbin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/bin:$PATH"
-# luarocks --version
-# openresty -v
-# nginx -v
 cd ..
 
 topic "Install Kong"
@@ -112,10 +109,6 @@ git clone "$KONG_GIT_URL"
 cd kong
 git checkout "$KONG_GIT_COMMIT"
 make install
-
-# ln -s "$(pwd)/bin/kong" /usr/bin/kong
-# eval "$(luarocks path)"
-# kong version -vv
 
 cd ${BP_DIR}
 mkdir -p $BUILD_DIR/.profile.d
@@ -128,4 +121,10 @@ cp $BP_DIR/bin/app/kong-* $BUILD_DIR/bin/
 
 mv $APP_PREFIX $BUILD_DIR/$KONG_RUNTIME
 export PATH="$BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot/luarocks/bin:$BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot/openresty/nginx/sbin:$BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot/openresty/bin:$BUILD_DIR/$KONG_RUNTIME/kong/bin:$PATH"
-export | grep -E -e ' (PATH)=' >"$BP_DIR/export"
+luarocks --version
+openresty -v
+nginx -v
+eval "$(luarocks path)"
+kong version -vv
+
+set_env PATH "$BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot/luarocks/bin:$BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot/openresty/nginx/sbin:$BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot/openresty/bin:$BUILD_DIR/$KONG_RUNTIME/kong/bin:$PATH"
