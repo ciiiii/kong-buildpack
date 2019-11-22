@@ -14,6 +14,6 @@ else
     KONG_CLUSTER_PRIVATE_IP='127.0.0.1'
 fi
 echo "Kong cluster private IP: $KONG_CLUSTER_PRIVATE_IP"
-luajit $SRC_DIR/config/generator.lua $SRC_DIR/config/kong.conf.etlua $SRC_DIR
+luajit "$SRC_DIR/config/generator.lua" "$SRC_DIR/config/kong.conf.etlua" "$SRC_DIR"
 
 source $SRC_DIR/.profile.d/kong-env
