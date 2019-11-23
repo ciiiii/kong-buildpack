@@ -64,7 +64,7 @@ apt-get $APT_OPTIONS update | indent
 
 for PACKAGE in $(cat $BP_DIR/Aptfile $BUILD_DIR/Aptfile); do
     topic "Install $PACKAGE"
-    apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall $PACKAGE | indent
+    apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install $PACKAGE | indent
 done
 
 # openresty-build-tools
@@ -103,10 +103,10 @@ nginx -v
 luajit -v
 
 topic "Install Kong"
-git clone "$KONG_GIT_URL"
-cd kong
-git checkout "$KONG_GIT_COMMIT"
-make install
+# git clone "$KONG_GIT_URL"
+# cd kong
+# git checkout "$KONG_GIT_COMMIT"
+# make install
 
 cd ${BP_DIR}
 mkdir -p $BUILD_DIR/.profile.d
