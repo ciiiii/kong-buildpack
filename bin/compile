@@ -79,10 +79,13 @@ cd openresty-build-tools
 #     --openresty $OPENRESTY_VERSION \
 #     --openssl $OPENSSL_VERSION \
 #     --luarocks $LUAROCKS_VERSION
+rm -f buildroot/openresty/luajit/bin/luajit
+mv buildroot/openresty/luajit/bin/luajit/luajit-2.1.0-beta3 luajit
 export PATH="$APP_PREFIX/openresty-build-tools/buildroot/luarocks/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/nginx/sbin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/bin:$PATH"
 luarocks --version
 openresty -v
 nginx -v
+luajit -v
 cd ..
 
 topic "Install Kong"
