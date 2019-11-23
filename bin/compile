@@ -71,19 +71,13 @@ HEROKU=$BUILD_DIR/.heroku
 mkdir $HEROKU
 
 cd $HEROKU
-ls $CACHE_DIR/openresty-build-tools
 
-if [ -d "$CACHE_DIR/openresty-build-tools" ]; then
-    topic "true"
-else
-    topic "false"
-fi
-kong version
 topic "Build Kong Dependencies"
 if [ -d "$CACHE_DIR/openresty-build-tools" ]; then
     echo "Using cache" | indent
     cp -r "$CACHE_DIR/openresty-build-tools" openresty-build-tools
 else
+    kong version
     echo "Download&Compile" | indent
     git clone https://github.com/Kong/openresty-build-tools.git
     cd openresty-build-tools
