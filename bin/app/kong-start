@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
 set -eu
-
 KONG_CONF="${KONG_CONF:-config/kong.conf}"
-ls -a /app
-/app/tmp/cache/kong-runtime/kong/bin/kong start -c $KONG_CONF
+kong start -c $KONG_CONF

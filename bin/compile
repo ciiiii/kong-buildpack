@@ -49,8 +49,7 @@ function indent() {
     esac
 }
 
-# APT
-
+# Install apt packages
 APT_CACHE_DIR="$CACHE_DIR/apt/cache"
 APT_STATE_DIR="$CACHE_DIR/apt/state"
 mkdir -p "$APT_CACHE_DIR/archives/partial"
@@ -67,63 +66,46 @@ for PACKAGE in $(cat $BP_DIR/Aptfile $BUILD_DIR/Aptfile); do
     apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install $PACKAGE | indent
 done
 
-# openresty-build-tools
-KONG_RUNTIME=kong-runtime
-APP_PREFIX="$CACHE_DIR/$KONG_RUNTIME"
-mkdir -p $APP_PREFIX
+# Install kong
+HEROKU=$BUILD_DIR/.heroku
+mkdir HEROKU
 
-ls $APP_PREFIX
-
-cd $APP_PREFIX
+cd $HEROKU
 topic "Build Kong Dependencies"
-# if [ ! -d "$APP_PREFIX/openresty-build-tools" ]; then
-#     git clone https://github.com/Kong/openresty-build-tools.git
-#     cd openresty-build-tools
-#     ./kong-ngx-build \
-#         -p buildroot \
-#         --openresty $OPENRESTY_VERSION \
-#         --openssl $OPENSSL_VERSION \
-#         --luarocks $LUAROCKS_VERSION
-#     cd ..
-# fi
-# buildroot/openresty/luajit/bin/luajit -v
-# sed -i "s#/build/#$APP_PREFIX/#g" buildroot/luarocks/bin/luarocks
-# ln -s -f buildroot/openresty/bin/openresty buildroot/openresty/nginx/sbin/nginx
-# rm -f buildroot/openresty/bin/openresty
-# buildroot/openresty/nginx/sbin/nginx -v
-# ln -s buildroot/openresty/nginx/sbin/nginx buildroot/openresty/bin/openresty
-# buildroot/openresty/bin/openresty -v
-# cp buildroot/openresty/nginx/sbin/nginx buildroot/openresty/bin/openresty
-# sed -i "s#/build/#$APP_PREFIX/#g" buildroot/openresty/bin/openresty
-# ln -s -f buildroot/openresty/luajit/bin/luajit buildroot/openresty/luajit/bin/luajit-2.1.0-beta3
-export PATH="$APP_PREFIX/openresty-build-tools/buildroot/luarocks/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/nginx/sbin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/bin:$APP_PREFIX/kong/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/luajit/bin:$PATH"
-luarocks --version
-openresty -v
-nginx -v
-luajit -v
+if [ -d "$CACHE_DIR/openresty-build-tools" ]; then
+    echo "Using cache" | indent
+    cp -r "$KONG_CACHE/openresty-build-tools" openresty-build-tools
+else
+    echo "Download&Compile" | indent
+    git clone https://github.com/Kong/openresty-build-tools.git
+    cd openresty-build-tools
+    ./kong-ngx-build \
+        -p buildroot \
+        --openresty $OPENRESTY_VERSION \
+        --openssl $OPENSSL_VERSION \
+        --luarocks $LUAROCKS_VERSION
+    cd ..
+    cp -r openresty-build-tools "$KONG_CACHE/openresty-build-tools"
+fi
+export PATH="$HEROKU/openresty-build-tools/buildroot/luarocks/bin:$HEROKU/openresty-build-tools/buildroot/openresty/nginx/sbin:$HEROKU/openresty-build-tools/buildroot/openresty/bin:$HEROKU/kong/bin:$HEROKU/openresty-build-tools/buildroot/openresty/luajit/bin:$PATH"
 
 topic "Install Kong"
-# git clone "$KONG_GIT_URL"
-# cd kong
-# git checkout "$KONG_GIT_COMMIT"
-# make install
+git clone "$KONG_GIT_URL"
+cd kong
+git checkout "$KONG_GIT_COMMIT"
+make install
 
+luarocks --version
+openresty -v
+luajit -v
+eval "$(luarocks path)"
+kong version
+
+echo "export PATH='$HEROKU/openresty-build-tools/buildroot/luarocks/bin:$HEROKU/openresty-build-tools/buildroot/openresty/nginx/sbin:$HEROKU/openresty-build-tools/buildroot/openresty/bin:$HEROKU/kong/bin:$HEROKU/openresty-build-tools/buildroot/openresty/luajit/bin:$PATH'" >>.profile.d/kong-config.sh
 cd ${BP_DIR}
-echo "export PATH='$APP_PREFIX/openresty-build-tools/buildroot/luarocks/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/nginx/sbin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/bin:$APP_PREFIX/kong/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/luajit/bin:$PATH'" >>.profile.d/kong-config.sh
 mkdir -p $BUILD_DIR/.profile.d
 mv .profile.d/* $BUILD_DIR/.profile.d
 mkdir -p $BUILD_DIR/config
 mv config/* $BUILD_DIR/config
-# Move executables for Procfile into place
 mkdir -p $BUILD_DIR/bin
 cp $BP_DIR/bin/app/kong-* $BUILD_DIR/bin/
-
-# mv $APP_PREFIX $BUILD_DIR/$KONG_RUNTIME
-# export PATH="$BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot/luarocks/bin:$BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot/openresty/nginx/sbin:$BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot/openresty/bin:$BUILD_DIR/$KONG_RUNTIME/kong/bin:$PATH"
-# luarocks --version
-# openresty -v
-# nginx -v
-eval "$(luarocks path)"
-kong version -vv
-mkdir $BUILD_DIR/.heroku
-echo "??????" >$BUILD_DIR/.heroku/hello
