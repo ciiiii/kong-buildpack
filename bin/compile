@@ -74,7 +74,7 @@ cd $HEROKU
 topic "Build Kong Dependencies"
 if [ -d "$CACHE_DIR/openresty-build-tools" ]; then
     echo "Using cache" | indent
-    cp -r "$KONG_CACHE/openresty-build-tools" openresty-build-tools
+    cp -r "$CACHE_DIR/openresty-build-tools" openresty-build-tools
 else
     echo "Download&Compile" | indent
     git clone https://github.com/Kong/openresty-build-tools.git
@@ -85,7 +85,7 @@ else
         --openssl $OPENSSL_VERSION \
         --luarocks $LUAROCKS_VERSION
     cd ..
-    cp -r openresty-build-tools "$KONG_CACHE/openresty-build-tools"
+    cp -r openresty-build-tools "$CACHE_DIR/openresty-build-tools"
 fi
 export PATH="$HEROKU/openresty-build-tools/buildroot/luarocks/bin:$HEROKU/openresty-build-tools/buildroot/openresty/nginx/sbin:$HEROKU/openresty-build-tools/buildroot/openresty/bin:$HEROKU/kong/bin:$HEROKU/openresty-build-tools/buildroot/openresty/luajit/bin:$PATH"
 
