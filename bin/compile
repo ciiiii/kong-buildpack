@@ -76,7 +76,7 @@ topic "Build Kong Dependencies"
 if [ -d "$CACHE_DIR/openresty-build-tools" ]; then
     echo "Using cache" | indent
     cp -r "$CACHE_DIR/openresty-build-tools" .
-    ls
+    ls openresty-build-tools/buildroot
 else
     kong version
     echo "Download&Compile" | indent
