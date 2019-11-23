@@ -125,4 +125,5 @@ cp $BP_DIR/bin/app/kong-* $BUILD_DIR/bin/
 # nginx -v
 eval "$(luarocks path)"
 kong version -vv
+mkdir $BUILD_DIR/.heroku
 echo "??????" >$BUILD_DIR/.heroku/hello
