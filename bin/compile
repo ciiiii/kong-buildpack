@@ -94,7 +94,7 @@ fi
 # cp buildroot/openresty/nginx/sbin/nginx buildroot/openresty/bin/openresty
 # sed -i "s#/build/#$APP_PREFIX/#g" buildroot/openresty/bin/openresty
 # ln -s -f buildroot/openresty/luajit/bin/luajit buildroot/openresty/luajit/bin/luajit-2.1.0-beta3
-export PATH="$APP_PREFIX/openresty-build-tools/buildroot/luarocks/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/nginx/sbin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/bin:$APP_PREFIX/kong/bin:$PATH"
+export PATH="$APP_PREFIX/openresty-build-tools/buildroot/luarocks/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/nginx/sbin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/bin:$APP_PREFIX/kong/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/luajit/bin:$PATH"
 luarocks --version
 openresty -v
 nginx -v
