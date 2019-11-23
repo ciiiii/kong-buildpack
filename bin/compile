@@ -68,7 +68,7 @@ done
 
 # Install kong
 HEROKU=$BUILD_DIR/.heroku
-mkdir HEROKU
+mkdir $HEROKU
 
 cd $HEROKU
 topic "Build Kong Dependencies"
