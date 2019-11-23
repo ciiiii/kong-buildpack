@@ -2,5 +2,5 @@
 set -eu
 
 KONG_CONF="${KONG_CONF:-config/kong.conf}"
-ls /app/tmp/cache/kong-runtime/
+ls -a /app
 /app/tmp/cache/kong-runtime/kong/bin/kong start -c $KONG_CONF

@@ -125,5 +125,4 @@ cp $BP_DIR/bin/app/kong-* $BUILD_DIR/bin/
 # nginx -v
 eval "$(luarocks path)"
 kong version -vv
-
-# set_env PATH "$APP_PREFIX/openresty-build-tools/buildroot/luarocks/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/nginx/sbin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/bin:$APP_PREFIX/kong/bin:$PATH"
+echo "??????" >$BUILD_DIR/.heroku/hello
