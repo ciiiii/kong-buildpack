@@ -2,5 +2,5 @@
 set -eu
 
 KONG_CONF="${KONG_CONF:-config/kong.conf}"
-
+env
 kong start -c $KONG_CONF
