@@ -72,20 +72,20 @@ KONG_RUNTIME=kong-runtime
 APP_PREFIX="$CACHE_DIR/$KONG_RUNTIME"
 mkdir -p $APP_PREFIX
 
-ls $CACHE_DIR
+ls $APP_PREFIX
 
 cd $APP_PREFIX
 topic "Build Kong Dependencies"
-if [ ! -d "$APP_PREFIX/openresty-build-tools" ]; then
-    git clone https://github.com/Kong/openresty-build-tools.git
-    cd openresty-build-tools
-    ./kong-ngx-build \
-        -p buildroot \
-        --openresty $OPENRESTY_VERSION \
-        --openssl $OPENSSL_VERSION \
-        --luarocks $LUAROCKS_VERSION
-    cd ..
-fi
+# if [ ! -d "$APP_PREFIX/openresty-build-tools" ]; then
+#     git clone https://github.com/Kong/openresty-build-tools.git
+#     cd openresty-build-tools
+#     ./kong-ngx-build \
+#         -p buildroot \
+#         --openresty $OPENRESTY_VERSION \
+#         --openssl $OPENSSL_VERSION \
+#         --luarocks $LUAROCKS_VERSION
+#     cd ..
+# fi
 # buildroot/openresty/luajit/bin/luajit -v
 # sed -i "s#/build/#$APP_PREFIX/#g" buildroot/luarocks/bin/luarocks
 # ln -s -f buildroot/openresty/bin/openresty buildroot/openresty/nginx/sbin/nginx
