@@ -81,7 +81,7 @@ cd openresty-build-tools
 #     --luarocks $LUAROCKS_VERSION
 # rm -f buildroot/openresty/luajit/bin/luajit
 # mv buildroot/openresty/luajit/bin/luajit-2.1.0-beta3 luajit
-ls -l buildroot/openresty/luajit/bin/luajit buildroot/openresty/luajit/bin/luajit-2.1.0-beta3
+ln -s buildroot/openresty/luajit/bin/luajit buildroot/openresty/luajit/bin/luajit-2.1.0-beta3
 
 export PATH="$APP_PREFIX/openresty-build-tools/buildroot/luarocks/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/nginx/sbin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/bin:$PATH"
 luarocks --version
