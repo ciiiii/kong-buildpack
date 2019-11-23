@@ -86,7 +86,8 @@ cd openresty-build-tools
     -p buildroot \
     --openresty $OPENRESTY_VERSION \
     --openssl $OPENSSL_VERSION \
-    --luarocks $LUAROCKS_VERSION
+    --luarocks $LUAROCKS_VERSION \
+    --force
 cd ..
 export PATH="$HEROKU/openresty-build-tools/buildroot/luarocks/bin:$HEROKU/openresty-build-tools/buildroot/openresty/nginx/sbin:$HEROKU/openresty-build-tools/buildroot/openresty/bin:$HEROKU/kong/bin:$HEROKU/openresty-build-tools/buildroot/openresty/luajit/bin:$PATH"
 
