@@ -109,6 +109,7 @@ topic "Install Kong"
 # make install
 
 cd ${BP_DIR}
+echo 'export PATH="$APP_PREFIX/openresty-build-tools/buildroot/luarocks/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/nginx/sbin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/bin:$APP_PREFIX/kong/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/luajit/bin:$PATH"' >>.profile.d/kong-config.sh
 mkdir -p $BUILD_DIR/.profile.d
 mv .profile.d/* $BUILD_DIR/.profile.d
 mkdir -p $BUILD_DIR/config
@@ -126,4 +127,3 @@ eval "$(luarocks path)"
 kong version -vv
 
 # set_env PATH "$APP_PREFIX/openresty-build-tools/buildroot/luarocks/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/nginx/sbin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/bin:$APP_PREFIX/kong/bin:$PATH"
-export | grep -E -e ' (PATH)=' >"$BP_DIR/export"
