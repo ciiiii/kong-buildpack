@@ -71,6 +71,9 @@ HEROKU=$BUILD_DIR/.heroku
 mkdir $HEROKU
 
 cd $HEROKU
+ls $CACHE_DIR/openresty-build-tools
+kong version
+
 topic "Build Kong Dependencies"
 if [ -d "$CACHE_DIR/openresty-build-tools" ]; then
     echo "Using cache" | indent
