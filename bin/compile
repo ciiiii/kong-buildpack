@@ -82,7 +82,7 @@ cd openresty-build-tools
 # rm -f buildroot/openresty/luajit/bin/luajit
 # mv buildroot/openresty/luajit/bin/luajit-2.1.0-beta3 luajit
 buildroot/openresty/luajit/bin/luajit -v
-sed -i "s#/build#/$APP_PREFIX#g" buildroot/luarocks/bin/luarocks
+sed -i "s#/build#$APP_PREFIX#g" buildroot/luarocks/bin/luarocks
 cat buildroot/luarocks/bin/luarocks
 # ln -s -f buildroot/openresty/luajit/bin/luajit buildroot/openresty/luajit/bin/luajit-2.1.0-beta3
 
