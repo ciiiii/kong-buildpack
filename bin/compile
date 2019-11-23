@@ -80,6 +80,9 @@ cd openresty-build-tools
 #     --openssl $OPENSSL_VERSION \
 #     --luarocks $LUAROCKS_VERSION
 export PATH="$APP_PREFIX/openresty-build-tools/buildroot/luarocks/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/nginx/sbin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/bin:$PATH"
+luarocks --version
+openresty -v
+nginx -v
 cd ..
 
 topic "Install Kong"
@@ -99,7 +102,7 @@ cp $BP_DIR/bin/app/kong-* $BUILD_DIR/bin/
 
 mv $APP_PREFIX $BUILD_DIR/$KONG_RUNTIME
 export PATH="$BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot/luarocks/bin:$BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot/openresty/nginx/sbin:$BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot/openresty/bin:$BUILD_DIR/$KONG_RUNTIME/kong/bin:$PATH"
-tree $BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot
+ls $BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot
 luarocks --version
 openresty -v
 nginx -v
