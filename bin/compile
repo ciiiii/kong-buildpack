@@ -86,7 +86,7 @@ cat buildroot/luarocks/bin/luarocks
 sed -i "s#/build/#$APP_PREFIX/#g" buildroot/luarocks/bin/luarocks
 cat buildroot/luarocks/bin/luarocks
 # ln -s -f buildroot/openresty/luajit/bin/luajit buildroot/openresty/luajit/bin/luajit-2.1.0-beta3
-
+buildroot/openresty-build-tools/buildroot/openresty/bin/openresty -v
 export PATH="$APP_PREFIX/openresty-build-tools/buildroot/luarocks/bin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/nginx/sbin:$APP_PREFIX/openresty-build-tools/buildroot/openresty/bin:$PATH"
 luarocks --version
 openresty -v
@@ -111,7 +111,6 @@ cp $BP_DIR/bin/app/kong-* $BUILD_DIR/bin/
 
 mv $APP_PREFIX $BUILD_DIR/$KONG_RUNTIME
 export PATH="$BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot/luarocks/bin:$BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot/openresty/nginx/sbin:$BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot/openresty/bin:$BUILD_DIR/$KONG_RUNTIME/kong/bin:$PATH"
-ls $BUILD_DIR/$KONG_RUNTIME/openresty-build-tools/buildroot
 luarocks --version
 openresty -v
 nginx -v
