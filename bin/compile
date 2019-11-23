@@ -85,6 +85,7 @@ buildroot/openresty/luajit/bin/luajit -v
 sed -i "s#/build/#$APP_PREFIX/#g" buildroot/luarocks/bin/luarocks
 # ln -s -f buildroot/openresty/bin/openresty buildroot/openresty/nginx/sbin/nginx
 rm -f buildroot/openresty/bin/openresty
+buildroot/openresty/nginx/sbin/nginx -v
 ln -s buildroot/openresty/nginx/sbin/nginx buildroot/openresty/bin/openresty
 buildroot/openresty/bin/openresty -v
 # cp buildroot/openresty/nginx/sbin/nginx buildroot/openresty/bin/openresty
