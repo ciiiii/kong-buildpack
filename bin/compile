@@ -83,7 +83,10 @@ cd openresty-build-tools
 # mv buildroot/openresty/luajit/bin/luajit-2.1.0-beta3 luajit
 buildroot/openresty/luajit/bin/luajit -v
 sed -i "s#/build/#$APP_PREFIX/#g" buildroot/luarocks/bin/luarocks
-ln -s -f buildroot/openresty/bin/openresty buildroot/openresty/nginx/sbin/nginx
+# ln -s -f buildroot/openresty/bin/openresty buildroot/openresty/nginx/sbin/nginx
+rm -f buildroot/openresty/bin/openresty
+ln -s buildroot/openresty/nginx/sbin/nginx buildroot/openresty/bin/openresty
+# cp buildroot/openresty/nginx/sbin/nginx buildroot/openresty/bin/openresty
 # sed -i "s#/build/#$APP_PREFIX/#g" buildroot/openresty/bin/openresty
 # ln -s -f buildroot/openresty/luajit/bin/luajit buildroot/openresty/luajit/bin/luajit-2.1.0-beta3
 
